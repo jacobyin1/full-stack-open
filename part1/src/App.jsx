@@ -1,37 +1,62 @@
-const Hello = (props) => {
-  return (
-    <div>
-      <p>Hello world {props.name}</p>
-    </div>
-  )
-}
-
-const Foot = (props) => {
+const Header = (props) => {
   return (
     <>
-      <h1>LOUD</h1>
+      <h1>{props.course.name}</h1>
     </>
   )
 }
 
-const App = () => {
-  console.log("hi")
+const Part = (props) => {
+  return (
+    <>
+      <p>
+        {props.name} {props.count}
+      </p>
+    </>
+  )
+}
 
-  // return (
-  //   <div>
-  //     <p>Hello world, it is {new Date().toString()}</p>
-  //   </div>
-  // )
+const Content = (props) => {
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name="George"/>
-      <Hello name="G"></Hello>
-      <Hello name="we"></Hello>
-      <Hello />
-      <Hello></Hello>
-      <Hello></Hello>
+      <Part name={props.parts[0].name} count={props.parts[0].exercises}></Part>
+      <Part name={props.parts[1].name} count={props.parts[1].exercises}></Part>
+      <Part name={props.parts[2].name} count={props.parts[2].exercises}></Part>
+    </div>
+  )
+}
 
+const Total = (props) => {
+  return (
+    <p>Number of exercises {props.parts[0].exercises+props.parts[1].exercises+props.parts[2].exercises}</p>
+  )
+}
+
+const App = () => {
+  const course = {
+    name: "Half Stack application development",
+    parts: [
+      {
+        name: "Fundamentals of React",
+        exercises: 10
+      },
+      {
+        name: "Using props to pass data",
+        exercises: 7
+      },
+      {
+        name: "State of a component",
+        exercises: 14
+      }
+    ]
+  }
+  
+
+  return (
+    <div>
+      <Header course={course}></Header>
+      <Content parts={course.parts}></Content>
+      <Total parts={course.parts}></Total>
     </div>
   )
 }
