@@ -1,0 +1,79 @@
+{
+  "notes": [
+    {
+      "id": "1",
+      "content": "HTML is easy",
+      "important": true
+    },
+    {
+      "id": "2",
+      "content": "Browser can execute only JavaScript",
+      "important": false
+    },
+    {
+      "id": "3",
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "important": true
+    },
+    {
+      "id": "4",
+      "content": "owfjowf",
+      "important": false
+    },
+    {
+      "id": "f0c0",
+      "content": "weofjwoiefj",
+      "important": false
+    },
+    {
+      "id": "ca68",
+      "content": "a new note...",
+      "important": false
+    },
+    {
+      "id": "ea2e",
+      "content": "a new note...",
+      "important": false
+    },
+    {
+      "id": "ee7a",
+      "content": "wef",
+      "important": false
+    },
+    {
+      "id": "edce",
+      "content": "a new note...",
+      "important": false
+    },
+    {
+      "id": "f59e",
+      "content": "a",
+      "important": true
+    },
+    {
+      "id": "1cbe",
+      "content": "wef",
+      "important": true
+    },
+    {
+      "id": "8829",
+      "content": "a new note...a",
+      "important": false
+    },
+    {
+      "id": "a72c",
+      "content": "",
+      "important": false
+    },
+    {
+      "id": "ce45",
+      "content": "wefwef",
+      "important": false
+    },
+    {
+      "id": "44be",
+      "content": "a new note...",
+      "important": true
+    }
+  ]
+}
