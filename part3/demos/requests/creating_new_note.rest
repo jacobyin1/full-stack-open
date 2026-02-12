@@ -1,0 +1,7 @@
+POST https://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "content": "VS code balh",
+    "important": true
+}
