@@ -10,7 +10,7 @@
     "start": "node index.js",
     "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "Remove-Item -Recurse -Force dist; npm --prefix ../../part2/phonebook run build; Copy-Item -Recurse ../../part2/demos/dist dist"
+    "build:ui": "Remove-Item -Recurse -Force dist; npm --prefix ../../part2/phonebook run build; Copy-Item -Recurse ../../part2/phonebook/dist dist"
   },
   "dependencies": {
     "express": "^5.2.1",
