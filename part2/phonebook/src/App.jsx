@@ -115,6 +115,9 @@ const App = () => {
           setNumber('')
           updateMessage(`Added ${person.name}`)
         })
+        .catch(error => {
+          updateMessage(error.response.data.error, false)
+        })
     }
   }
 

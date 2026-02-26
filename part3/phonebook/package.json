@@ -13,7 +13,9 @@
     "build:ui": "Remove-Item -Recurse -Force dist; npm --prefix ../../part2/phonebook run build; Copy-Item -Recurse ../../part2/phonebook/dist dist"
   },
   "dependencies": {
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "mongoose": "^9.2.1",
     "morgan": "^1.10.1"
   }
 }
