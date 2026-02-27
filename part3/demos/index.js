@@ -7,121 +7,121 @@ const app = express()
 app.use(express.static('dist'))
 app.use(express.json())
 
-let notes = [
-  {
-    id: "1",
-    content: "HTML is easy",
-    important: true
-  },
-  {
-    id: "2",
-    content: "Browser can execute only JavaScript",
-    important: false
-  },
-  {
-    id: "3",
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true
-  }
-]
+// let notes = [
+//   {
+//     id: '1',
+//     content: 'HTML is easy',
+//     important: true
+//   },
+//   {
+//     id: '2',
+//     content: 'Browser can execute only JavaScript',
+//     important: false
+//   },
+//   {
+//     id: '3',
+//     content: 'GET and POST are the most important methods of HTTP protocol',
+//     important: true
+//   }
+// ]
 
 app.get('/', (request, response) => {
-    response.send('<h1>Hello</h1>')
+  response.send('<h1>Hello</h1>')
 })
 
 app.get('/api/notes', (request, response) => {
-    Note.find({}).then(notes => {
-        response.json(notes)
-    })
+  Note.find({}).then(notes => {
+    response.json(notes)
+  })
 })
 
 app.get('/api/notes/:id', (request, response, next) => {
-    // const id = request.params.id
-    // const note = notes.find(note => note.id === id)
-    // if (note) {
-    //     response.json(note)
-    // } else {
-    //     response.status(404).end()
-    // }
-    Note.findById(request.params.id).then(note => {
-        if (note) {
-            response.json(note)
-        } else {
-            response.status(404).end()
-        }
-    })
+  // const id = request.params.id
+  // const note = notes.find(note => note.id === id)
+  // if (note) {
+  //     response.json(note)
+  // } else {
+  //     response.status(404).end()
+  // }
+  Note.findById(request.params.id).then(note => {
+    if (note) {
+      response.json(note)
+    } else {
+      response.status(404).end()
+    }
+  })
     .catch(error => next(error))
 })
 
 app.delete('/api/notes/:id', (request, response, next) => {
-    Note.findByIdAndDelete(request.params.id)
-        .then(result => {
-            response.status(204).end()
-        })
-        .catch(error => next(error))
-    // const id = request.params.id 
+  Note.findByIdAndDelete(request.params.id)
+    .then((result) => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
+    // const id = request.params.id
     // notes = notes.filter(note => note.id !== id)
     // response.status(204).end()
 })
 
 app.put('/api/notes/:id', (request, response, next) => {
-    const { content, important } = request.body
+  const { content, important } = request.body
 
-    Note.findById(request.params.id)
-        .then(note => {
-            if (!note) {
-                return response.status(404).end()
-            }
+  Note.findById(request.params.id)
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
 
-            note.content = content
-            note.important = important 
+      note.content = content
+      note.important = important
 
-            return note.save().then((updatedNote) => {
-                response.json(updatedNote)
-            })
-        })
-        .catch(error => next(error))
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
+    })
+    .catch(error => next(error))
 })
 
 app.post('/api/notes', (request, response, next) => {
-    const body = request.body
+  const body = request.body
 
-    if (!body.content) {
-        return response.status(400).json({
-            error: 'content missing'
-        })
-    }
-
-    const note = new Note({
-        content: body.content,
-        important: body.important || false,
+  if (!body.content) {
+    return response.status(400).json({
+      error: 'content missing'
     })
+  }
 
-    note.save()
-        .then(savedNote => {
-            response.json(savedNote)
-        })
-        .catch(error => next(error))
+  const note = new Note({
+    content: body.content,
+    important: body.important || false,
+  })
+
+  note.save()
+    .then(savedNote => {
+      response.json(savedNote)
+    })
+    .catch(error => next(error))
     // const maxId = notes.length > 0 
     //     ? Math.max(...notes.map(n => Number(n.id)))
     //     : 0
 
-    // const body = request.body 
+  // const body = request.body 
 
-    // if (!body.content) {
-    //     return response.status(400).json({
-    //         error: 'content missing'
-    //     })
-    // }
+  // if (!body.content) {
+  //     return response.status(400).json({
+  //         error: 'content missing'
+  //     })
+  // }
 
-    // const note = {
-    //     content: body.content,
-    //     important: body.important || false,
-    //     id: String(maxId + 1)
-    // }
+  // const note = {
+  //     content: body.content,
+  //     important: body.important || false,
+  //     id: String(maxId + 1)
+  // }
     
-    // notes = notes.concat(note)
-    // response.json(note)
+  // notes = notes.concat(note)
+  // response.json(note)
 })
 
 const unknownEndpoint = (request, response) => {
@@ -130,21 +130,21 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
-    console.error(error.message)
+  console.error(error.message)
 
-    if (error.name === 'CastError') {
-        return response.status(400).send( {error: 'malformatted id' })
-    } else if (error.name === 'ValidationError') {
-        return response.status(400).json({ error: error.message })
-    }
+  if (error.name === 'CastError') {
+    return response.status(400).send( {error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  }
 
-    next(error)
+  next(error)
 }
 app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
 
 
